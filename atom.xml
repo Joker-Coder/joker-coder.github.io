@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Joker&#39;s Personal Website</title>
   
-  
+  <subtitle>只有那些疯狂到认为自己可以改变世界的人&lt;br/&gt;才可以真的改变世界</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
