@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Joker&#39;s Personal Website">
 <meta property="og:description" content="接口安全问题 请求身份是否合法？   请求参数是否被篡改？   请求是否唯一？  AccessKey&amp;amp;SecretKey （开放平台）请求身份为开发者分配AccessKey（开发者标识，确保唯一）和SecretKey（用于接口加密，确保不易被穷举，生成算法不易被猜测）。   防止篡改参数签名算法  按照请求参数名的字母升序排列非空请求参数（包含AccessKey），使用URL键值对的格式（">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-02T07:04:00.000Z">
+<meta property="og:updated_time" content="2018-02-02T07:44:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开放API接口签名验证">
 <meta name="twitter:description" content="接口安全问题 请求身份是否合法？   请求参数是否被篡改？   请求是否唯一？  AccessKey&amp;amp;SecretKey （开放平台）请求身份为开发者分配AccessKey（开发者标识，确保唯一）和SecretKey（用于接口加密，确保不易被穷举，生成算法不易被猜测）。   防止篡改参数签名算法  按照请求参数名的字母升序排列非空请求参数（包含AccessKey），使用URL键值对的格式（">
@@ -428,7 +428,7 @@
 <li>对stringSignTemp进行MD5运算，并将得到的字符串所有字符转换为大写，得到Sign值。  </li>
 </ol>
 <p>请求携带参数<strong>AccessKey</strong>和<strong>Sign</strong>，只有拥有合法的身份AccessKey和正确的签名Sign才能放行。这样就解决了身份验证和参数篡改问题，即使请求参数被劫持，由于获取不到SecretKey（<strong>仅作本地加密使用，不参与网络传输</strong>），无法伪造合法的请求。</p>
-<h4 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h4><p>虽然目前无法篡改请求参数，但是可以重复使用请求参数伪造二次请求。</p>
+<h4 id="唯一性"><a href="#唯一性" class="headerlink" title="唯一性"></a>唯一性</h4><p>虽然解决了请求参数被篡改的隐患，但是还存在着重复使用请求参数伪造二次请求的隐患（<strong>重放攻击</strong>）。</p>
 <h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><ul>
 <li><p>客户端</p>
 </li>
