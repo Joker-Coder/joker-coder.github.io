@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F01%2F30%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    <title><![CDATA[开放API接口签名验证]]></title>
+    <url>%2F2018%2F02%2F02%2F%E5%BC%80%E6%94%BEAPI%E6%8E%A5%E5%8F%A3%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81%2F</url>
+    <content type="text"><![CDATA[接口安全问题 请求身份是否合法？ 请求参数是否被篡改？ 请求是否唯一？ AccessKey&amp;SecretKey （开放平台）请求身份为开发者分配AccessKey（开发者标识，确保唯一）和SecretKey（用于接口加密，确保不易被穷举，生成算法不易被猜测）。 防止篡改参数签名算法 按照请求参数名的字母升序排列非空请求参数（包含AccessKey），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA； 在stringA最后拼接上Secretkey得到字符串stringSignTemp； 对stringSignTemp进行MD5运算，并将得到的字符串所有字符转换为大写，得到Sign值。 请求携带参数AccessKey和Sign，只有拥有合法的身份AccessKey和正确的签名Sign才能放行。这样就解决了身份验证和参数篡改问题，即使请求参数被劫持，由于获取不到SecretKey（仅作本地加密使用，不参与网络传输），无法伪造合法的请求。 唯一性虽然目前无法篡改请求参数，但是可以重复使用请求参数伪造二次请求。 实现 客户端 服务端 Token&amp;AppKey（APP）在APP开放API接口的设计中，由于大多数接口涉及到用户的个人信息以及产品的敏感数据，所以要对这些接口进行身份验证，为了安全起见让用户暴露的明文密码次数越少越好，然而客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。 Token身份验证 用户登录向服务器提供认证信息（如账号和密码），服务器验证成功后返回Token给客户端； 客户端将Token保存在本地，后续发起请求时，携带此Token； 服务器检查Token的有效性，有效则放行，无效（Token错误或过期）则拒绝。 安全隐患：Token被劫持，伪造请求和篡改参数。 Token+AppKey签名验证与上面开发平台的验证方式类似，为客户端分配AppKey（密钥，用于接口加密，不参与传输），将AppKey和所有参数组合成源串，根据签名算法生成签名值，发送请求时将签名值一起发送给服务器验证。这样，即使Token被劫持，对方不知道AppKey和签名算法，就无法伪造请求和篡改参数。再结合上述的唯一性解决方案，即使请求参数被劫持也无法伪造二次重复请求。 实现 客户端 服务端 源码]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>接口</tag>
+        <tag>签名</tag>
+        <tag>加密</tag>
+        <tag>算法</tag>
+        <tag>token</tag>
+      </tags>
   </entry>
 </search>
